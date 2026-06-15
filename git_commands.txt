@@ -19,7 +19,7 @@ git remote add origin ttps://github.com/Sirath07/github-for-devops.git
 git remote -v
 git status
  
-ggit remote set-url origin https://(Personal access tokens (classic))@github.com/Sirath07/github-for-devops.git
+git remote set-url origin https://(Personal access tokens (classic))@github.com/Sirath07/github-for-devops.git
 clear
 git remote -v
 git push origin master
