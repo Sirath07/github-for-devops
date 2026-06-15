@@ -28,3 +28,4 @@ history
 ls
 
 this new changes is done through github not from terminal
+git pull origin master
