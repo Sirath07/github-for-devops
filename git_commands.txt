@@ -27,11 +27,20 @@ clear
 history
 ls
 
+
 this new changes is done through github not from terminal
 git pull origin master
 
 What is a Branch?
 A branch is an independent copy of your codebase where you can make changes without affecting the main code.
+
+(trainwithshubham)
+git branch (to check the branches)
+git branch dev (created a new branch named as dev)
+git switch dev (it basically switches from master branch to dev)
+git log (it shows the log of the git Q is used to exit the log)
+git log --oneline (shows log in one line)
+git checkout dev (works same as switch, switches from master branch to dev)
 
 The Default Branch
 When you create a repo, GitHub creates a default branch called main (older repos use master).
@@ -86,3 +95,32 @@ Merges the specified branch into whichever branch you are currently on. Usually 
 
 6. git branch -d name
 Deletes the branch from your local machine after it has been merged and is no longer needed.
+
+
+
+What is HEAD in Git?
+Simple Definition
+HEAD is a pointer that tells Git "where you are right now" in your repository.
+Think of it like this:
+
+🗺️ HEAD is like a "You Are Here" marker on a map. Wherever you are currently working — that is where HEAD is pointing.
+
+
+What Does HEAD Point To?
+HEAD always points to the latest commit on your current branch.
+So if you are on the main branch and made 3 commits:
+Commit 1 → Commit 2 → Commit 3  ← HEAD
+HEAD is pointing at Commit 3 — the most recent one.
+
+
+HEAD in Simple Words
+HEAD = Your current location in Git
+It always answers the question — "Which commit am I currently on?"
+
+
+Hooks in GitHubWhat is a Hook?A hook is a script that runs automatically when a specific Git event happens.Think of it like this:
+🔔 A hook is like a trigger. When something happens in Git — like a commit or a push — the hook fires and runs a script automatically without you doing anything manually.
+There are two types of hooks you need to know:Git Hooks — Run locally on your machine.
+
+GitHub Webhooks — Run on the GitHub server and notify external services.
+
