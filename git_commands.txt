@@ -26,3 +26,5 @@ git push origin master
 clear
 history
 ls
+
+this new changes is done through github not from terminal
