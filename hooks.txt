@@ -1,0 +1,95 @@
+Your Pre-Commit Hook — Full Explanation
+Great work setting this up! Let me break down exactly what your code is doing line by line.
+
+Your Code
+bashfiles=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
+
+flake8 $files
+
+Line 1 — Breaking it Down
+bashfiles=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
+This line has multiple parts. Let me explain each one:
+git diff --cached
+
+Looks at files that are staged (files you did git add on). Only staged files are checked, not all files in your project.
+--name-only
+
+Instead of showing the full diff, it only returns the file names.
+--diff-filter=ACM
+
+Filters files by their status:
+A → Added files (new files)
+C → Copied files
+M → Modified files
+So it only checks files that are new, copied, or modified — not deleted files.
+| grep '\.py$'
+
+The pipe | sends the file names to grep. Grep then filters and keeps only .py files. So if you staged app.py and README.md, only app.py is picked.
+files=$(...)
+
+Stores all the filtered Python file names into a variable called files.
+
+Line 2 — Breaking it Down
+bashflake8 $files
+Runs flake8 on all the Python files stored in the files variable.
+Flake8 checks for:
+E → PEP 8 style errors  (like your E305 error)
+W → Warnings
+F → Logical errors (undefined variables, unused imports etc.)
+
+How the Block Works
+This is the key part — when flake8 finds an error, it exits with code 1. Git reads this exit code and blocks the commit automatically.
+git commit is triggered
+        ↓
+pre-commit hook runs
+        ↓
+flake8 checks your .py files
+        ↓
+Error found → exit code 1 → COMMIT BLOCKED ❌
+No errors  → exit code 0 → COMMIT ALLOWED ✅
+
+Testing Your Hook
+Create a bad Python file to test it:
+python# bad_code.py
+import os        # unused import → flake8 will catch this
+def hello():
+    return "hi"
+print(hello())   # E305 → only 1 blank line
+Now stage and try to commit:
+bashgit add bad_code.py
+git commit -m "Testing pre-commit hook"
+You should see flake8 errors printed and the commit will be blocked.
+
+One Small Improvement for Your Script
+Add a check for when no Python files are staged — otherwise flake8 runs with no files and may throw an error:
+bash#!/bin/bash
+
+files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
+
+# Only run flake8 if there are Python files staged
+if [ -n "$files" ]; then
+    flake8 $files
+    if [ $? -ne 0 ]; then
+        echo "❌ Flake8 errors found. Commit blocked. Fix the errors and try again."
+        exit 1
+    fi
+fi
+
+echo "✅ All checks passed. Proceeding with commit."
+-n "$files" means "if files variable is not empty".
+$? captures the exit code of flake8. If it is not 0, the commit is blocked with a clear message.
+
+Full Flow of What You Built
+git add app.py
+        ↓
+git commit -m "message"
+        ↓
+.git/hooks/pre-commit runs
+        ↓
+Finds all staged .py files
+        ↓
+Runs flake8 on them
+        ↓
+Error found → Commit blocked ❌
+No errors  → Commit goes through ✅
+You have built a real automated code quality gate — this is exactly what companies use in their DevOps pipelines to maintain clean code.
