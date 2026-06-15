@@ -1,0 +1,27 @@
+git status
+ clear
+git add .
+git status
+clear
+git status
+git commit -m "added testing files"
+clear
+git status
+rm testing.py
+ls
+clear
+git status
+git restore testing.py
+clear
+git status
+
+git remote add origin ttps://github.com/Sirath07/github-for-devops.git 
+git remote -v
+git status
+ 
+ggit remote set-url origin https://(Personal access tokens (classic))@github.com/Sirath07/github-for-devops.git
+clear
+git remote -v
+git push origin master
+clear
+history
