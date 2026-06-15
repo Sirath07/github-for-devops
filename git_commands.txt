@@ -29,3 +29,60 @@ ls
 
 this new changes is done through github not from terminal
 git pull origin master
+
+What is a Branch?
+A branch is an independent copy of your codebase where you can make changes without affecting the main code.
+
+The Default Branch
+When you create a repo, GitHub creates a default branch called main (older repos use master).
+All your stable, working code lives here.
+
+Key Branch Concepts
+1. 🔀 Creating a Branch
+bashgit branch feature-login       # creates a branch
+git checkout feature-login     # switches to it
+
+# OR in one command:
+git checkout -b feature-login
+2. 📋 Listing Branches
+bashgit branch          # local branches
+git branch -a       # all branches (including remote)
+3. 🔁 Switching Between Branches
+bashgit checkout main              # go back to main
+git checkout feature-login     # go to feature branch
+4. ⬆️ Pushing a Branch to GitHub
+bashgit push origin feature-login
+5. 🔗 Merging a Branch Back to Main
+bashgit checkout main
+git merge feature-login
+6. 🗑️ Deleting a Branch (after merge)
+bashgit branch -d feature-login         # delete locally
+git push origin --delete feature-login  # delete on GitHub
+
+Real-World Branch Strategy (Used in DevOps)
+main          → Production-ready code
+  └── dev     → Ongoing development
+        ├── feature/login-page
+        ├── feature/payment-gateway
+        └── bugfix/header-issue
+This is called GitFlow — a popular branching model in DevOps teams.
+
+Quick Summary — Git Branch Commands
+
+1. git branch name
+Creates a new branch with the given name. It does not switch to it automatically.
+
+2. git checkout name
+Switches you to an already existing branch so you can start working on it.
+
+3. git checkout -b name
+Creates a new branch AND switches to it immediately — both steps in one command.
+
+4. git push origin name
+Uploads your local branch to GitHub so others can see it or so it gets saved remotely.
+
+5. git merge name
+Merges the specified branch into whichever branch you are currently on. Usually you switch to main first, then run this.
+
+6. git branch -d name
+Deletes the branch from your local machine after it has been merged and is no longer needed.
