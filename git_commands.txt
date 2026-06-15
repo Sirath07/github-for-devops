@@ -118,7 +118,8 @@ HEAD = Your current location in Git
 It always answers the question — "Which commit am I currently on?"
 
 
-Hooks in GitHubWhat is a Hook?A hook is a script that runs automatically when a specific Git event happens.Think of it like this:
+Hooks in GitHubWhat is a Hook?
+A hook is a script that runs automatically when a specific Git event happens.Think of it like this:
 🔔 A hook is like a trigger. When something happens in Git — like a commit or a push — the hook fires and runs a script automatically without you doing anything manually.
 There are two types of hooks you need to know:Git Hooks — Run locally on your machine.
 
